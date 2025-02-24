@@ -1,8 +1,8 @@
 <?php
 
 $options = array(
-  'location' => 'http://localhost/webservices/appwebservices/server.php',
-  'uri' => 'http://localhost/webservices/appwebservices/'
+  'location' => 'http://localhost:8000/web-services/part-2/server.php',
+  'uri' => 'http://localhost:8000/web-services/part-2/'
 );
 
 $client = new SoapClient(NULL, $options);
@@ -131,7 +131,7 @@ $resultado = $client->validarUsuario($usuarios, $claves);
 
   <div class="container">
     <h2>Iniciar Sesión</h2>
-    <form action="cliente.php" method="POST">
+    <form action="client.php" method="POST">
       <label for="username">Usuario</label>
       <input type="text" name="username" id="username" required>
 
