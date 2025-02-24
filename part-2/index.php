@@ -7,10 +7,14 @@ $options = array(
 
 $client = new SoapClient(NULL, $options);
 
-$usuarios = $_POST['username'];
-$claves = $_POST['password'];
+$usuarios = isset($_POST['username']) ? $_POST['username'] : null;
+$claves = isset($_POST['password']) ? $_POST['password'] : null;
 
-$resultado = $client->validarUsuario($usuarios, $claves);
+$resultado = null;
+
+if ($usuarios !== null && $claves !== null) {
+  $resultado = $client->validarUsuario($usuarios, $claves);
+}
 
 ?><!DOCTYPE html>
 <html lang="es">
@@ -130,16 +134,18 @@ $resultado = $client->validarUsuario($usuarios, $claves);
 <body>
 
   <div class="container">
-    <h2>Iniciar Sesión</h2>
-    <form action="client.php" method="POST">
-      <label for="username">Usuario</label>
-      <input type="text" name="username" id="username" required>
-
-      <label for="password">Clave</label>
-      <input type="password" name="password" id="password" required>
-
-      <button type="submit" class="btn">Mandar</button>
-    </form>
+    <h2>Resultado</h2>
+    <p class="message 
+      <?php
+      if (!empty($resultado)) {
+        echo ($resultado === "Los datos ingresados son válidos") ? 'success' : 'error';
+      } else {
+        echo 'hidden';
+      }
+      ?>">
+      <?php echo htmlspecialchars($resultado); ?>
+    </p>
+    <a href="/web-services/part-2/index.php" class="btn">Volver</a>
   </div>
 
 </body>

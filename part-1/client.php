@@ -94,7 +94,7 @@
     <div class="result">
       <?php echo $resultado; ?>
     </div>
-    <a href="index.php" class="back-button">Volver</a>
+    <a href="/web-services/part-1/index.php" class="back-button">Volver</a>
   </div>
 </body>
 
