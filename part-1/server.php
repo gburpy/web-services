@@ -28,7 +28,7 @@ class serverSoap extends Connection
 
 }
 
-$options = array('uri' => 'http://localhost:8000/web-services/');
+$options = array('uri' => 'http://localhost:8000/web-services/part-1');
 $server = new SoapServer(NULL, $options);
 $server->setClass('serverSoap');
 $server->handle();

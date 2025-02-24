@@ -97,7 +97,7 @@
 </head>
 
 <body>
-  <form action="/web-services/client.php" method="POST">
+  <form action="/web-services/part-1/client.php" method="POST">
     <label for="num1">Calculadora</label>
     <input type="text" name="num1" id="num1" required oninput="validarInput(this)"
       placeholder="Ingrese el primer número">
