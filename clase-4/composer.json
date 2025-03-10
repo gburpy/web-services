@@ -1,0 +1,11 @@
+{
+    "name": "lab-apc-13/clase-4",
+    "autoload": {
+        "psr-4": {
+            "LabApc13\\Clase4\\": "src/"
+        }
+    },
+    "require": {
+        "econea/nusoap": "^0.9.18"
+    }
+}
