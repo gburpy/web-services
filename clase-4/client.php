@@ -96,7 +96,7 @@ class MySOAPClient
 
 try {
   $SOAPClient = new MySOAPClient();
-  $response = $SOAPClient->sum(6, 5);
+  $response = $SOAPClient->substract(6, 5);
   if (isset($response['error'])) {
     echo "<h2 style='color: red;'>Error</h2>";
     echo "<p><strong>Detalle:</strong> {$response['detail']}</p>";

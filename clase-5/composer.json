@@ -1,0 +1,17 @@
+{
+  "name": "lab-apc-13/clase-5",
+  "autoload": {
+    "psr-4": {
+      "LabApc13\\Clase5\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "alejandro galvis",
+      "email": "agalvis@cotecnova.edu.co"
+    }
+  ],
+  "require": {
+    "econea/nusoap": "^0.9.18"
+  }
+}
