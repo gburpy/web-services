@@ -11,11 +11,22 @@ class Server
     $this->db = (new Connection())->getConnection();
   }
 
-  public function authenticate($token)
+  public function authenticate($token = null)
   {
-    $validToken = '__my__secret__';
-    return $token === $validToken;
+    if (!$token) {
+      $headers = getallheaders();
+      if (isset($headers['Authorization'])) {
+        $token = trim(str_replace("Bearer", "", $headers['Authorization']));
+      } else {
+        return false;
+      }
+    }
+
+    $hashedToken = getenv('SECRET_TOKEN');
+
+    return password_verify($token, $hashedToken);
   }
+
 
   public function getProducts($token)
   {
@@ -121,6 +132,45 @@ class Server
     $_query = $this->db->prepare($sql);
     $_query->execute($params);
 
-    return ['success' => true, 'message' => 'Producto actualizado correctamente'];
+    $$query = $this->db->prepare('SELECT id, nombre, precio, stock FROM productos WHERE id = ?');
+    $$query->execute([$id]);
+
+    $updatedProduct = $$query->fetch(PDO::FETCH_ASSOC);
+
+    return [
+      'id' => (int) $updatedProduct['id'],
+      'nombre' => $updatedProduct['nombre'],
+      'precio' => (float) $updatedProduct['precio'],
+      'stock' => (int) $updatedProduct['stock']
+    ];
   }
+
+  public function deleteProduct($token, $id)
+  {
+    if (!$this->authenticate($token))
+      return [];
+
+    $query = $this->db->prepare('SELECT * FROM productos WHERE id = ?');
+    $query->execute([$id]);
+    $product = $query->fetch(PDO::FETCH_ASSOC);
+
+    if (!$product)
+      return [];
+
+    $sql = $this->db->prepare('DELETE FROM productos WHERE id = ?');
+    $sql->execute([$id]);
+
+    return [
+      'id' => (int) $product['id'],
+      'nombre' => $product['nombre'],
+      'precio' => (float) $product['precio'],
+      'stock' => (int) $product['stock']
+    ];
+
+  }
+
 }
+
+echo password_hash('__my__secret__', PASSWORD_BCRYPT);
+
+

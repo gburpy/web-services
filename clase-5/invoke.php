@@ -107,4 +107,20 @@ $server->register(
   'Busca un producto y luego lo actualiza.'
 );
 
+$server->register(
+  'Server.deleteProduct',
+  [
+    'id' => 'xsd:int',
+    'token' => 'xsd:string'
+  ],
+  [
+    'return' => 'tns:Product'
+  ],
+  $namespace,
+  false,
+  'rpc',
+  'encoded',
+  'Elimina un producto'
+);
+
 $server->service(file_get_contents('php://input'));
